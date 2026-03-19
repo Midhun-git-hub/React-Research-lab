@@ -127,3 +127,16 @@
     @apply font-sans;
     }
 }
+
+@keyframes chaos {
+  0% { transform: rotate(2deg) translateX(0px); }
+  20% { transform: rotate(-2deg) translateX(-2px); }
+  40% { transform: rotate(3deg) translateX(2px); }
+  60% { transform: rotate(-1deg) translateX(-1px); }
+  80% { transform: rotate(2deg) translateX(1px); }
+  100% { transform: rotate(2deg) translateX(0px); }
+}
+
+.animate-chaos {
+  animation: chaos 0.3s infinite;
+}

@@ -1,10 +1,12 @@
 import React from 'react'
-import { Button } from "@/components/ui/button"
+import CardFlipProps from './Contents/CardFlipProps.jsx';
+import Intro from './Contents/Intro.jsx';
 
 const App = () => {
   return (
-    <div className="flex min-h-svh flex-col items-center justify-center">
-      <Button>Click me</Button>
+    <div className="min-h-screen bg-[radial-gradient(circle_at_top,#1a1a2e,#000)] text-white">
+      <Intro/>
+      <CardFlipProps/>
     </div>
   )
 }

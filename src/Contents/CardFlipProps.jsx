@@ -1,5 +1,5 @@
 import React from 'react'
-import CardFlip from './components/mvpblocks/card-flip';
+import CardFlip from '../components/mvpblocks/card-flip';
 
 const CardFlipProps = () => {
   return (

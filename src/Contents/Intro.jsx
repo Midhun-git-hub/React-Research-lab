@@ -1,41 +1,40 @@
-import React, { useEffect, useState } from "react"
-import { FuzzyText } from '@/components/ui/fuzzy-text';
+import React, { useEffect, useState } from "react";
+import { FuzzyText } from "@/components/ui/fuzzy-text";
 
 const texts = [
     "Welcome to my UI Lab...",
     "Where things might break 😅",
     "Testing UI libraries...",
     "Sometimes good, sometimes chaos...",
-    "But always learning 🚀"
-]
+    "But always learning 🚀",
+];
 
 const Intro = () => {
-    const [displayText, setDisplayText] = useState("")
-    const [index, setIndex] = useState(0)
-    const [charIndex, setCharIndex] = useState(0)
+    const [displayText, setDisplayText] = useState("");
+    const [index, setIndex] = useState(0);
+    const [charIndex, setCharIndex] = useState(0);
 
     useEffect(() => {
         if (charIndex < texts[index].length) {
             const timeout = setTimeout(() => {
-                setDisplayText((prev) => prev + texts[index][charIndex])
-                setCharIndex(charIndex + 1)
-            }, 40)
+                setDisplayText((prev) => prev + texts[index][charIndex]);
+                setCharIndex(charIndex + 1);
+            }, 40);
 
-            return () => clearTimeout(timeout)
+            return () => clearTimeout(timeout);
         } else {
             const timeout = setTimeout(() => {
-                setDisplayText("")
-                setCharIndex(0)
-                setIndex((prev) => (prev + 1) % texts.length)
-            }, 1200)
+                setDisplayText("");
+                setCharIndex(0);
+                setIndex((prev) => (prev + 1) % texts.length);
+            }, 1200);
 
-            return () => clearTimeout(timeout)
+            return () => clearTimeout(timeout);
         }
-    }, [charIndex, index])
+    }, [charIndex, index]);
 
     return (
         <div className="flex flex-col items-center justify-center text-center px-6 pt-20 pb-10">
-
             {/* Fuzzy-style heading */}
             <div className="text-4xl md:text-6xl font-bold text-white text-center">
                 <FuzzyText
@@ -55,12 +54,11 @@ const Intro = () => {
             </p>
 
             {/* Random chaotic badge */}
-           <div className="mt-4 text-base font-bold tracking-widest text-pink-400 bg-pink-500/10 px-3 py-1 rounded animate-chaos">
-  unstable builds 🚧
-</div>
-
+            <div className="mt-4 text-base font-bold tracking-widest text-pink-400 bg-pink-500/10 px-3 py-1 rounded animate-chaos">
+                unstable builds 🚧
+            </div>
         </div>
-    )
-}
+    );
+};
 
-export default Intro
+export default Intro;

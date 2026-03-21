@@ -1,5 +1,6 @@
 import React from 'react'
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import CardFlipProps from './Contents/CardFlipProps.jsx';
 import Intro from './Contents/Intro.jsx';
 
@@ -9,6 +10,7 @@ const App = () => {
       <Intro/>
       <CardFlipProps/>
       <Analytics />
+      <SpeedInsights />
     </div>
   )
 }

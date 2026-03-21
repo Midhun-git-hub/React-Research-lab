@@ -1,5 +1,5 @@
 import React from 'react'
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/react";
 import CardFlipProps from './Contents/CardFlipProps.jsx';
 import Intro from './Contents/Intro.jsx';
 

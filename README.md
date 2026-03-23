@@ -1,4 +1,4 @@
-# 🎨 UI Experiment Lab
+# 🎨 React (UI) Experiment Lab
 
 A small playground where I experiment with different UI libraries using real portfolio projects.
 
@@ -25,16 +25,7 @@ Instead of a static portfolio, this project explores:
 * React (Vite)
 * Tailwind CSS
 * shadcn/ui
-* MVP Blocks
-
----
-
-## 🚀 What’s inside
-
-* Card Flip UI
-* Fuzzy Text intro
-* Typewriter effects
-* More experiments coming...
+* (.....)
 
 ---
 

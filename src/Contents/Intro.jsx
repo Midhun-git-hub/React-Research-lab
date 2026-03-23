@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { FuzzyText } from "@/components/ui/fuzzy-text";
+import FuzzyText from "@/components/FuzzyText";
+
+
 
 const texts = [
-    "Welcome to my UI Lab...",
-    "Where things might break 😅",
-    "Testing UI libraries...",
-    "Sometimes good, sometimes chaos...",
-    "But always learning 🚀",
+    "Welcome to React Lab...",
+    "Where UI goes through different experiments",
+    "Different UI libraries have been taken as 'Test Subjects'...",
+    "Sometimes Success, sometimes Failure...",
+    "But always improving",
 ];
 
 const Intro = () => {
@@ -36,25 +38,33 @@ const Intro = () => {
     return (
         <div className="flex flex-col items-center justify-center text-center px-6 pt-20 pb-10">
             {/* Fuzzy-style heading */}
-            <div className="text-4xl md:text-6xl font-bold text-white text-center">
+            <div className="text-4xl md:text-6xl mt-45 text-center">
                 <FuzzyText
-                    text="REACT LAB"
-                    fontSize="clamp(2rem, 8vw, 5rem)"
-                    noiseIntensity={1}
-                    enableHover={true}
-                    baseColor="#ffaaaa"
-                    glowColor="#ffaaaa"
-                />
+                    baseIntensity={0.1}
+                    hoverIntensity={0.5}
+                    enableHover
+                >
+                    404
+                </FuzzyText>
+            </div>
+            <div className="text-lg md:text-2xl mt-4">
+                <FuzzyText
+                    baseIntensity={0.1}
+                    hoverIntensity={0.3}
+                    enableHover
+                >
+                    React
+                </FuzzyText>
             </div>
 
             {/* Typewriter text */}
-            <p className="mt-6 text-zinc-400 text-lg h-6">
+            <p className="mt-10 text-zinc-400 text-lg h-6">
                 {displayText}
                 <span className="animate-pulse">|</span>
             </p>
 
             {/* Random chaotic badge */}
-            <div className="mt-4 text-base font-bold tracking-widest text-pink-400 bg-pink-500/10 px-3 py-1 rounded animate-chaos">
+            <div className="mt-10 text-base font-bold tracking-widest text-pink-400 bg-pink-500/10 px-3 py-1 rounded animate-chaos">
                 unstable builds 🚧
             </div>
         </div>

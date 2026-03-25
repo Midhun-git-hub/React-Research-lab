@@ -87,7 +87,7 @@ const Navbar = () => {
                                 <div className="relative">
                                     <div className="h-10 w-10">
                                         <DotLottieReact
-                                            src="https://lottie.host/86add633-acdd-49e3-b786-d6a8055988dc/krdEJmjmdK.lottie"
+                                            src="https://lottie.host/68c9e5a8-ead1-4f73-a6af-209d1b0e29ea/7e8kmO4KVp.lottie"
                                             loop
                                             autoplay
                                         />

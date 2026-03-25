@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowRight, Zap, Search } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion"; //eslint-disable-line no-unused-vars
+import { Menu, X, ArrowRight, Search } from "lucide-react";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 const navItems = [
     { name: "Home", href: "#" },
@@ -67,8 +68,8 @@ const Navbar = () => {
         <>
             <motion.header
                 className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-                        ? "border border-zinc-800 bg-black/70 backdrop-blur-md"
-                        : "bg-transparent"
+                    ? "border border-zinc-800 bg-black/70 backdrop-blur-md"
+                    : "bg-transparent"
                     }`}
                 variants={containerVariants}
                 initial="hidden"
@@ -84,18 +85,21 @@ const Navbar = () => {
                         >
                             <a href="#" className="flex items-center space-x-3">
                                 <div className="relative">
-                                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 shadow-lg">
-                                        <Zap className="h-5 w-5 text-white" />
+                                    <div className="h-10 w-10">
+                                        <DotLottieReact
+                                            src="https://lottie.host/86add633-acdd-49e3-b786-d6a8055988dc/krdEJmjmdK.lottie"
+                                            loop
+                                            autoplay
+                                        />
                                     </div>
-                                    <div className="absolute -top-1 -right-1 h-3 w-3 animate-pulse rounded-full bg-green-400"></div>
                                 </div>
 
                                 <div className="flex flex-col">
                                     <span className="text-white text-lg font-bold">
-                                        UI Lab
+                                        React Lab
                                     </span>
                                     <span className="text-zinc-400 text-xs -mt-1">
-                                        experiment mode
+                                        experimental playground
                                     </span>
                                 </div>
                             </a>

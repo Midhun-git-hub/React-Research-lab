@@ -150,13 +150,13 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-20 flex flex-col items-center justify-center text-center px-6 min-h-screen">
 
-        <div className="text-4xl md:text-6xl">
+        <div className="text-[clamp(1.8rem,3vw,2.2rem)] text-zinc-300 leading-none">
           <FuzzyText baseIntensity={0.1} hoverIntensity={0.5} enableHover>
             404
           </FuzzyText>
         </div>
 
-        <div className="text-lg md:text-2xl mt-3">
+        <div className="text-sm mt-2 text-zinc-400">
           <FuzzyText baseIntensity={0.1} hoverIntensity={0.3} enableHover>
             React
           </FuzzyText>

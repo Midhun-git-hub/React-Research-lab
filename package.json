@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@fontsource-variable/geist": "^5.2.8",
+    "@gsap/react": "^2.1.2",
     "@lottiefiles/dotlottie-react": "^0.18.7",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.5.0",

@@ -25,6 +25,7 @@
     "framer-motion": "^12.38.0",
     "gsap": "^3.14.2",
     "lucide-react": "^0.577.0",
+    "motion": "^12.38.0",
     "ogl": "^1.0.11",
     "path": "^0.12.7",
     "postprocessing": "^6.39.0",

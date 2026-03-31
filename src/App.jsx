@@ -1,11 +1,12 @@
 import React from 'react'
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from '@vercel/speed-insights/react';
+import { MusicToggleButton } from './components/ui/skiper-ui/skiper25';
 import Navbar from './Contents/Navbar.jsx';
 import Hero from './Contents/Hero.jsx';
 import About from './Contents/About.jsx';
-import { MusicToggleButton } from './components/ui/skiper-ui/skiper25';
 import Gallery from './Contents/Gallery.jsx';
+import Footer from './Contents/Footer.jsx';
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
       <Hero />
       <About />
       <Gallery />
+      <Footer />
       <Analytics />
       <SpeedInsights />
     </div>

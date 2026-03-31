@@ -19,19 +19,19 @@ import img13 from '/images/image13.jpg';
 const Gallery = () => {
 
     const myitems = [
-        { image: img1, text: "Image 1" },
-        { image: img2, text: "Image 2" },
-        { image: img3, text: "Image 3" },
-        { image: img4, text: "Image 4" },
-        { image: img5, text: "Image 5" },
-        { image: img6, text: "Image 6" },
-        { image: img7, text: "Image 7" },
-        { image: img8, text: "Image 8" },
-        { image: img9, text: "Image 9" },
-        { image: img10, text: "Image 10" },
-        { image: img11, text: "Image 11" },
-        { image: img12, text: "Image 12" },
-        { image: img13, text: "Image 13" },
+        { image: img1, text: "Gojo Satoru" },
+        { image: img2, text: "Roronoa Zoro" },
+        { image: img3, text: "Kid Buu" },
+        { image: img4, text: "Naruto Uzumaki" },
+        { image: img5, text: "Eren Yeager" },
+        { image: img6, text: "Attack Titan" },
+        { image: img7, text: "Light Yagami with Ryuk" },
+        { image: img8, text: "Sung Jinwoo and his army" },
+        { image: img9, text: "Sōsuke Aizen" },
+        { image: img10, text: "Tanjirou Kamado" },
+        { image: img11, text: "Ichigo kurosaki" },
+        { image: img12, text: "Hollow Ichigo" },
+        { image: img13, text: "Edward Newgate" },
     ]
 
     const [isMobile, setIsMobile] = useState(false);

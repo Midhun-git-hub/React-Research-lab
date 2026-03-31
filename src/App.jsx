@@ -7,6 +7,7 @@ import Hero from './Contents/Hero.jsx';
 import About from './Contents/About.jsx';
 import Gallery from './Contents/Gallery.jsx';
 import Footer from './Contents/Footer.jsx';
+import LabNotice from './Contents/LabNotice.jsx';
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
       <Gallery />
       <Footer />
       <Analytics />
+      <LabNotice />
       <SpeedInsights />
     </div>
   )

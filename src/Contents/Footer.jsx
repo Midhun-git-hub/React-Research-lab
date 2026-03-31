@@ -1,11 +1,24 @@
 import React from "react";
 import { motion } from "framer-motion"; //eslint-disable-line
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import CircularText from "@/components/mvpblocks/circular-text";
+
 
 
 const Footer = () => {
   return (
-    <footer className="w-full py-10 border-t border-white/10 bg-black text-white flex flex-col items-center justify-center gap-4">
+    <footer className="relative w-full py-10 border-t border-white/10 bg-black text-white flex flex-col items-center justify-center gap-4">
+
+      {/* LEFT FLOATING CIRCLE */}
+      <div className="absolute left-4 top-1/2 -translate-y-1/2 scale-40 opacity-80">
+        <CircularText
+          text="*Under*Development"
+          spinDuration={20}
+          radius={25}
+          onHover="goBonkers"
+          className="text-[10px] text-white"
+        />
+      </div>
 
       {/* Text */}
       <motion.p

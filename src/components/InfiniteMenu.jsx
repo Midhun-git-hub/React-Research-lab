@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
-import { mat4, quat, vec2, vec3 } from 'gl-matrix';
+import { useEffect, useRef, useState } from "react";
+import { mat4, quat, vec2, vec3 } from "gl-matrix";
 
 const discVertShaderSource = `#version 300 es
 
@@ -157,7 +157,7 @@ class Geometry {
   }
 
   spherize(radius = 1) {
-    this.vertices.forEach(vertex => {
+    this.vertices.forEach((vertex) => {
       vec3.normalize(vertex.normal, vertex.position);
       vec3.scale(vertex.position, vertex.normal, radius);
     });
@@ -169,24 +169,26 @@ class Geometry {
       vertices: this.vertexData,
       indices: this.indexData,
       normals: this.normalData,
-      uvs: this.uvData
+      uvs: this.uvData,
     };
   }
 
   get vertexData() {
-    return new Float32Array(this.vertices.flatMap(v => Array.from(v.position)));
+    return new Float32Array(
+      this.vertices.flatMap((v) => Array.from(v.position)),
+    );
   }
 
   get normalData() {
-    return new Float32Array(this.vertices.flatMap(v => Array.from(v.normal)));
+    return new Float32Array(this.vertices.flatMap((v) => Array.from(v.normal)));
   }
 
   get uvData() {
-    return new Float32Array(this.vertices.flatMap(v => Array.from(v.uv)));
+    return new Float32Array(this.vertices.flatMap((v) => Array.from(v.uv)));
   }
 
   get indexData() {
-    return new Uint16Array(this.faces.flatMap(f => [f.a, f.b, f.c]));
+    return new Uint16Array(this.faces.flatMap((f) => [f.a, f.b, f.c]));
   }
 
   getMidPoint(ndxA, ndxB, cache) {
@@ -198,7 +200,11 @@ class Geometry {
     const b = this.vertices[ndxB].position;
     const ndx = this.vertices.length;
     cache[cacheKey] = ndx;
-    this.addVertex((a[0] + b[0]) * 0.5, (a[1] + b[1]) * 0.5, (a[2] + b[2]) * 0.5);
+    this.addVertex(
+      (a[0] + b[0]) * 0.5,
+      (a[1] + b[1]) * 0.5,
+      (a[2] + b[2]) * 0.5,
+    );
     return ndx;
   }
 }
@@ -243,7 +249,7 @@ class IcosahedronGeometry extends Geometry {
       -1,
       -t,
       0,
-      1
+      1,
     ).addFace(
       0,
       11,
@@ -304,7 +310,7 @@ class IcosahedronGeometry extends Geometry {
       7,
       9,
       8,
-      1
+      1,
     );
   }
 }
@@ -350,7 +356,12 @@ function createShader(gl, type, source) {
   return null;
 }
 
-function createProgram(gl, shaderSources, transformFeedbackVaryings, attribLocations) {
+function createProgram(
+  gl,
+  shaderSources,
+  transformFeedbackVaryings,
+  attribLocations,
+) {
   const program = gl.createProgram();
 
   [gl.VERTEX_SHADER, gl.FRAGMENT_SHADER].forEach((type, ndx) => {
@@ -359,7 +370,11 @@ function createProgram(gl, shaderSources, transformFeedbackVaryings, attribLocat
   });
 
   if (transformFeedbackVaryings) {
-    gl.transformFeedbackVaryings(program, transformFeedbackVaryings, gl.SEPARATE_ATTRIBS);
+    gl.transformFeedbackVaryings(
+      program,
+      transformFeedbackVaryings,
+      gl.SEPARATE_ATTRIBS,
+    );
   }
 
   if (attribLocations) {
@@ -394,7 +409,11 @@ function makeVertexArray(gl, bufLocNumElmPairs, indices) {
   if (indices) {
     const indexBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
-    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW);
+    gl.bufferData(
+      gl.ELEMENT_ARRAY_BUFFER,
+      new Uint16Array(indices),
+      gl.STATIC_DRAW,
+    );
   }
 
   gl.bindVertexArray(null);
@@ -405,7 +424,8 @@ function resizeCanvasToDisplaySize(canvas) {
   const dpr = Math.min(2, window.devicePixelRatio);
   const displayWidth = Math.round(canvas.clientWidth * dpr);
   const displayHeight = Math.round(canvas.clientHeight * dpr);
-  const needResize = canvas.width !== displayWidth || canvas.height !== displayHeight;
+  const needResize =
+    canvas.width !== displayWidth || canvas.height !== displayHeight;
   if (needResize) {
     canvas.width = displayWidth;
     canvas.height = displayHeight;
@@ -450,24 +470,24 @@ class ArcballControl {
     this._rotationVelocity = 0;
     this._combinedQuat = quat.create();
 
-    canvas.addEventListener('pointerdown', e => {
+    canvas.addEventListener("pointerdown", (e) => {
       vec2.set(this.pointerPos, e.clientX, e.clientY);
       vec2.copy(this.previousPointerPos, this.pointerPos);
       this.isPointerDown = true;
     });
-    canvas.addEventListener('pointerup', () => {
+    canvas.addEventListener("pointerup", () => {
       this.isPointerDown = false;
     });
-    canvas.addEventListener('pointerleave', () => {
+    canvas.addEventListener("pointerleave", () => {
       this.isPointerDown = false;
     });
-    canvas.addEventListener('pointermove', e => {
+    canvas.addEventListener("pointermove", (e) => {
       if (this.isPointerDown) {
         vec2.set(this.pointerPos, e.clientX, e.clientY);
       }
     });
 
-    canvas.style.touchAction = 'none';
+    canvas.style.touchAction = "none";
   }
 
   update(deltaTime, targetFrameDuration = 16) {
@@ -479,7 +499,11 @@ class ArcballControl {
       const INTENSITY = 0.3 * timeScale;
       const ANGLE_AMPLIFICATION = 5 / timeScale;
 
-      const midPointerPos = vec2.sub(vec2.create(), this.pointerPos, this.previousPointerPos);
+      const midPointerPos = vec2.sub(
+        vec2.create(),
+        this.pointerPos,
+        this.previousPointerPos,
+      );
       vec2.scale(midPointerPos, midPointerPos, INTENSITY);
 
       if (vec2.sqrLen(midPointerPos) > this.EPSILON) {
@@ -496,11 +520,21 @@ class ArcballControl {
 
         this.quatFromVectors(a, b, this.pointerRotation, angleFactor);
       } else {
-        quat.slerp(this.pointerRotation, this.pointerRotation, this.IDENTITY_QUAT, INTENSITY);
+        quat.slerp(
+          this.pointerRotation,
+          this.pointerRotation,
+          this.IDENTITY_QUAT,
+          INTENSITY,
+        );
       }
     } else {
       const INTENSITY = 0.1 * timeScale;
-      quat.slerp(this.pointerRotation, this.pointerRotation, this.IDENTITY_QUAT, INTENSITY);
+      quat.slerp(
+        this.pointerRotation,
+        this.pointerRotation,
+        this.IDENTITY_QUAT,
+        INTENSITY,
+      );
 
       if (this.snapTargetDirection) {
         const SNAPPING_INTENSITY = 0.2;
@@ -513,12 +547,25 @@ class ArcballControl {
       }
     }
 
-    const combinedQuat = quat.multiply(quat.create(), snapRotation, this.pointerRotation);
-    this.orientation = quat.multiply(quat.create(), combinedQuat, this.orientation);
+    const combinedQuat = quat.multiply(
+      quat.create(),
+      snapRotation,
+      this.pointerRotation,
+    );
+    this.orientation = quat.multiply(
+      quat.create(),
+      combinedQuat,
+      this.orientation,
+    );
     quat.normalize(this.orientation, this.orientation);
 
     const RA_INTENSITY = 0.8 * timeScale;
-    quat.slerp(this._combinedQuat, this._combinedQuat, combinedQuat, RA_INTENSITY);
+    quat.slerp(
+      this._combinedQuat,
+      this._combinedQuat,
+      combinedQuat,
+      RA_INTENSITY,
+    );
     quat.normalize(this._combinedQuat, this._combinedQuat);
 
     const rad = Math.acos(this._combinedQuat[3]) * 2.0;
@@ -588,8 +635,8 @@ class InfiniteGridMenu {
     matrices: {
       view: mat4.create(),
       projection: mat4.create(),
-      inversProjection: mat4.create()
-    }
+      inversProjection: mat4.create(),
+    },
   };
 
   nearestVertexIndex = null;
@@ -597,11 +644,18 @@ class InfiniteGridMenu {
   scaleFactor = 1.0;
   movementActive = false;
 
-  constructor(canvas, items, onActiveItemChange, onMovementChange, onInit = null, scale = 1.0) {
+  constructor(
+    canvas,
+    items,
+    onActiveItemChange,
+    onMovementChange,
+    onInit = null,
+    scale = 1.0,
+  ) {
     this.canvas = canvas;
     this.items = items || [];
-    this.onActiveItemChange = onActiveItemChange || (() => {});
-    this.onMovementChange = onMovementChange || (() => {});
+    this.onActiveItemChange = onActiveItemChange || (() => { });
+    this.onMovementChange = onMovementChange || (() => { });
     this.scaleFactor = scale;
     this.camera.position[2] = 3 * scale;
     this.#init(onInit);
@@ -611,7 +665,7 @@ class InfiniteGridMenu {
     this.viewportSize = vec2.set(
       this.viewportSize || vec2.create(),
       this.canvas.clientWidth,
-      this.canvas.clientHeight
+      this.canvas.clientHeight,
     );
 
     const gl = this.gl;
@@ -632,59 +686,96 @@ class InfiniteGridMenu {
     this.#animate(this.#deltaTime);
     this.#render();
 
-    requestAnimationFrame(t => this.run(t));
+    requestAnimationFrame((t) => this.run(t));
   }
 
   #init(onInit) {
-    this.gl = this.canvas.getContext('webgl2', { antialias: true, alpha: false });
+    this.gl = this.canvas.getContext("webgl2", {
+      antialias: true,
+      alpha: false,
+    });
     const gl = this.gl;
     if (!gl) {
-      throw new Error('No WebGL 2 context!');
+      throw new Error("No WebGL 2 context!");
     }
 
-    this.viewportSize = vec2.fromValues(this.canvas.clientWidth, this.canvas.clientHeight);
+    this.viewportSize = vec2.fromValues(
+      this.canvas.clientWidth,
+      this.canvas.clientHeight,
+    );
     this.drawBufferSize = vec2.clone(this.viewportSize);
 
-    this.discProgram = createProgram(gl, [discVertShaderSource, discFragShaderSource], null, {
-      aModelPosition: 0,
-      aModelNormal: 1,
-      aModelUvs: 2,
-      aInstanceMatrix: 3
-    });
+    this.discProgram = createProgram(
+      gl,
+      [discVertShaderSource, discFragShaderSource],
+      null,
+      {
+        aModelPosition: 0,
+        aModelNormal: 1,
+        aModelUvs: 2,
+        aInstanceMatrix: 3,
+      },
+    );
 
     this.discLocations = {
-      aModelPosition: gl.getAttribLocation(this.discProgram, 'aModelPosition'),
-      aModelUvs: gl.getAttribLocation(this.discProgram, 'aModelUvs'),
-      aInstanceMatrix: gl.getAttribLocation(this.discProgram, 'aInstanceMatrix'),
-      uWorldMatrix: gl.getUniformLocation(this.discProgram, 'uWorldMatrix'),
-      uViewMatrix: gl.getUniformLocation(this.discProgram, 'uViewMatrix'),
-      uProjectionMatrix: gl.getUniformLocation(this.discProgram, 'uProjectionMatrix'),
-      uCameraPosition: gl.getUniformLocation(this.discProgram, 'uCameraPosition'),
-      uScaleFactor: gl.getUniformLocation(this.discProgram, 'uScaleFactor'),
-      uRotationAxisVelocity: gl.getUniformLocation(this.discProgram, 'uRotationAxisVelocity'),
-      uTex: gl.getUniformLocation(this.discProgram, 'uTex'),
-      uFrames: gl.getUniformLocation(this.discProgram, 'uFrames'),
-      uItemCount: gl.getUniformLocation(this.discProgram, 'uItemCount'),
-      uAtlasSize: gl.getUniformLocation(this.discProgram, 'uAtlasSize')
+      aModelPosition: gl.getAttribLocation(this.discProgram, "aModelPosition"),
+      aModelUvs: gl.getAttribLocation(this.discProgram, "aModelUvs"),
+      aInstanceMatrix: gl.getAttribLocation(
+        this.discProgram,
+        "aInstanceMatrix",
+      ),
+      uWorldMatrix: gl.getUniformLocation(this.discProgram, "uWorldMatrix"),
+      uViewMatrix: gl.getUniformLocation(this.discProgram, "uViewMatrix"),
+      uProjectionMatrix: gl.getUniformLocation(
+        this.discProgram,
+        "uProjectionMatrix",
+      ),
+      uCameraPosition: gl.getUniformLocation(
+        this.discProgram,
+        "uCameraPosition",
+      ),
+      uScaleFactor: gl.getUniformLocation(this.discProgram, "uScaleFactor"),
+      uRotationAxisVelocity: gl.getUniformLocation(
+        this.discProgram,
+        "uRotationAxisVelocity",
+      ),
+      uTex: gl.getUniformLocation(this.discProgram, "uTex"),
+      uFrames: gl.getUniformLocation(this.discProgram, "uFrames"),
+      uItemCount: gl.getUniformLocation(this.discProgram, "uItemCount"),
+      uAtlasSize: gl.getUniformLocation(this.discProgram, "uAtlasSize"),
     };
 
     this.discGeo = new DiscGeometry(56, 1);
     this.discBuffers = this.discGeo.data;
-    this.discVAO = makeVertexArray(gl, [
-      [makeBuffer(gl, this.discBuffers.vertices, gl.STATIC_DRAW), this.discLocations.aModelPosition, 3],
-      [makeBuffer(gl, this.discBuffers.uvs, gl.STATIC_DRAW), this.discLocations.aModelUvs, 2]
-    ], this.discBuffers.indices);
+    this.discVAO = makeVertexArray(
+      gl,
+      [
+        [
+          makeBuffer(gl, this.discBuffers.vertices, gl.STATIC_DRAW),
+          this.discLocations.aModelPosition,
+          3,
+        ],
+        [
+          makeBuffer(gl, this.discBuffers.uvs, gl.STATIC_DRAW),
+          this.discLocations.aModelUvs,
+          2,
+        ],
+      ],
+      this.discBuffers.indices,
+    );
 
     this.icoGeo = new IcosahedronGeometry();
     this.icoGeo.subdivide(1).spherize(this.SPHERE_RADIUS);
-    this.instancePositions = this.icoGeo.vertices.map(v => v.position);
+    this.instancePositions = this.icoGeo.vertices.map((v) => v.position);
     this.DISC_INSTANCE_COUNT = this.icoGeo.vertices.length;
     this.#initDiscInstances(this.DISC_INSTANCE_COUNT);
 
     this.worldMatrix = mat4.create();
     this.#initTexture();
 
-    this.control = new ArcballControl(this.canvas, deltaTime => this.#onControlUpdate(deltaTime));
+    this.control = new ArcballControl(this.canvas, (deltaTime) =>
+      this.#onControlUpdate(deltaTime),
+    );
 
     this.#updateCameraMatrix();
     this.#updateProjectionMatrix(gl);
@@ -695,64 +786,84 @@ class InfiniteGridMenu {
 
   #initTexture() {
     const gl = this.gl;
-    this.tex = createAndSetupTexture(gl, gl.LINEAR, gl.LINEAR, gl.CLAMP_TO_EDGE, gl.CLAMP_TO_EDGE);
+    this.tex = createAndSetupTexture(
+      gl,
+      gl.LINEAR,
+      gl.LINEAR,
+      gl.CLAMP_TO_EDGE,
+      gl.CLAMP_TO_EDGE,
+    );
 
     const itemCount = Math.max(1, this.items.length);
     this.atlasSize = Math.ceil(Math.sqrt(itemCount));
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
     const cellSize = 512;
 
     canvas.width = this.atlasSize * cellSize;
     canvas.height = this.atlasSize * cellSize;
 
-    Promise.all(this.items.map(item =>
-  new Promise(resolve => {
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = () => resolve(img);
-    img.src = item.image;
-  })
-)).then(images => {
-  images.forEach((img, i) => {
-    const x = (i % this.atlasSize) * cellSize;
-    const y = Math.floor(i / this.atlasSize) * cellSize;
+    Promise.all(
+      this.items.map(
+        (item) =>
+          new Promise((resolve) => {
+            const img = new Image();
+            img.crossOrigin = "anonymous";
+            img.onload = () => resolve(img);
+            img.src = item.image;
+          }),
+      ),
+    ).then((images) => {
+      images.forEach((img, i) => {
+        const x = (i % this.atlasSize) * cellSize;
+        const y = Math.floor(i / this.atlasSize) * cellSize;
 
-    // ✅ FIX: preserve aspect ratio (no stretching)
-    const aspect = img.width / img.height;
+        // ✅ FIX: preserve aspect ratio (no stretching)
+        const aspect = img.width / img.height;
 
-    let drawWidth = cellSize;
-    let drawHeight = cellSize;
+        let drawWidth = cellSize;
+        let drawHeight = cellSize;
 
-    if (aspect > 1) {
-      // wide image
-      drawHeight = cellSize / aspect;
-    } else {
-      // tall image
-      drawWidth = cellSize * aspect;
-    }
+        if (aspect > 1) {
+          // wide image
+          drawHeight = cellSize / aspect;
+        } else {
+          // tall image
+          drawWidth = cellSize * aspect;
+        }
 
-    const offsetX = x + (cellSize - drawWidth) / 2;
-    const offsetY = y + (cellSize - drawHeight) / 2;
+        const offsetX = x + (cellSize - drawWidth) / 2;
+        const offsetY = y + (cellSize - drawHeight) / 2;
 
-    ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
-  });
+        ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+      });
 
-  gl.bindTexture(gl.TEXTURE_2D, this.tex);
-  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, canvas);
-  gl.generateMipmap(gl.TEXTURE_2D);
-})
-  };
+      gl.bindTexture(gl.TEXTURE_2D, this.tex);
+      gl.texImage2D(
+        gl.TEXTURE_2D,
+        0,
+        gl.RGBA,
+        gl.RGBA,
+        gl.UNSIGNED_BYTE,
+        canvas,
+      );
+      gl.generateMipmap(gl.TEXTURE_2D);
+    });
+  }
 
   #initDiscInstances(count) {
     const gl = this.gl;
     this.discInstances = {
       matricesArray: new Float32Array(count * 16),
       matrices: [],
-      buffer: gl.createBuffer()
+      buffer: gl.createBuffer(),
     };
     for (let i = 0; i < count; ++i) {
-      const instanceMatrixArray = new Float32Array(this.discInstances.matricesArray.buffer, i * 16 * 4, 16);
+      const instanceMatrixArray = new Float32Array(
+        this.discInstances.matricesArray.buffer,
+        i * 16 * 4,
+        16,
+      );
       instanceMatrixArray.set(mat4.create());
       this.discInstances.matrices.push(instanceMatrixArray);
     }
@@ -761,14 +872,21 @@ class InfiniteGridMenu {
     gl.bufferData(
       gl.ARRAY_BUFFER,
       this.discInstances.matricesArray.byteLength,
-      gl.DYNAMIC_DRAW
+      gl.DYNAMIC_DRAW,
     );
     const mat4AttribSlotCount = 4;
     const bytesPerMatrix = 16 * 4;
     for (let j = 0; j < mat4AttribSlotCount; ++j) {
       const loc = this.discLocations.aInstanceMatrix + j;
       gl.enableVertexAttribArray(loc);
-      gl.vertexAttribPointer(loc, 4, gl.FLOAT, false, bytesPerMatrix, j * 4 * 4);
+      gl.vertexAttribPointer(
+        loc,
+        4,
+        gl.FLOAT,
+        false,
+        bytesPerMatrix,
+        j * 4 * 4,
+      );
       gl.vertexAttribDivisor(loc, 1);
     }
     gl.bindBuffer(gl.ARRAY_BUFFER, null);
@@ -779,28 +897,36 @@ class InfiniteGridMenu {
     const gl = this.gl;
     this.control.update(deltaTime, this.TARGET_FRAME_DURATION);
 
-    let positions = this.instancePositions.map(p => vec3.transformQuat(vec3.create(), p, this.control.orientation));
+    let positions = this.instancePositions.map((p) =>
+      vec3.transformQuat(vec3.create(), p, this.control.orientation),
+    );
     const scale = 0.25;
     const SCALE_INTENSITY = 0.6;
     positions.forEach((p, ndx) => {
-      const s = (Math.abs(p[2]) / this.SPHERE_RADIUS) * SCALE_INTENSITY + (1 - SCALE_INTENSITY);
+      const s =
+        (Math.abs(p[2]) / this.SPHERE_RADIUS) * SCALE_INTENSITY +
+        (1 - SCALE_INTENSITY);
       const finalScale = s * scale;
       const matrix = mat4.create();
       mat4.multiply(
         matrix,
         matrix,
-        mat4.fromTranslation(mat4.create(), vec3.negate(vec3.create(), p))
-      );
-      mat4.multiply(matrix, matrix, mat4.targetTo(mat4.create(), [0, 0, 0], p, [0, 1, 0]));
-      mat4.multiply(
-        matrix,
-        matrix,
-        mat4.fromScaling(mat4.create(), [finalScale, finalScale, finalScale])
+        mat4.fromTranslation(mat4.create(), vec3.negate(vec3.create(), p)),
       );
       mat4.multiply(
         matrix,
         matrix,
-        mat4.fromTranslation(mat4.create(), [0, 0, -this.SPHERE_RADIUS])
+        mat4.targetTo(mat4.create(), [0, 0, 0], p, [0, 1, 0]),
+      );
+      mat4.multiply(
+        matrix,
+        matrix,
+        mat4.fromScaling(mat4.create(), [finalScale, finalScale, finalScale]),
+      );
+      mat4.multiply(
+        matrix,
+        matrix,
+        mat4.fromTranslation(mat4.create(), [0, 0, -this.SPHERE_RADIUS]),
       );
 
       mat4.copy(this.discInstances.matrices[ndx], matrix);
@@ -823,25 +949,33 @@ class InfiniteGridMenu {
     gl.clearColor(0, 0, 0, 0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-    gl.uniformMatrix4fv(this.discLocations.uWorldMatrix, false, this.worldMatrix);
-    gl.uniformMatrix4fv(this.discLocations.uViewMatrix, false, this.camera.matrices.view);
+    gl.uniformMatrix4fv(
+      this.discLocations.uWorldMatrix,
+      false,
+      this.worldMatrix,
+    );
+    gl.uniformMatrix4fv(
+      this.discLocations.uViewMatrix,
+      false,
+      this.camera.matrices.view,
+    );
     gl.uniformMatrix4fv(
       this.discLocations.uProjectionMatrix,
       false,
-      this.camera.matrices.projection
+      this.camera.matrices.projection,
     );
     gl.uniform3f(
       this.discLocations.uCameraPosition,
       this.camera.position[0],
       this.camera.position[1],
-      this.camera.position[2]
+      this.camera.position[2],
     );
     gl.uniform4f(
       this.discLocations.uRotationAxisVelocity,
       this.control.rotationAxis[0],
       this.control.rotationAxis[1],
       this.control.rotationAxis[2],
-      this.smoothRotationVelocity * 1.1
+      this.smoothRotationVelocity * 1.1,
     );
 
     gl.uniform1i(this.discLocations.uItemCount, this.items.length);
@@ -859,12 +993,17 @@ class InfiniteGridMenu {
       this.discBuffers.indices.length,
       gl.UNSIGNED_SHORT,
       0,
-      this.DISC_INSTANCE_COUNT
+      this.DISC_INSTANCE_COUNT,
     );
   }
 
   #updateCameraMatrix() {
-    mat4.targetTo(this.camera.matrix, this.camera.position, [0, 0, 0], this.camera.up);
+    mat4.targetTo(
+      this.camera.matrix,
+      this.camera.position,
+      [0, 0, 0],
+      this.camera.up,
+    );
     mat4.invert(this.camera.matrices.view, this.camera.matrix);
   }
 
@@ -882,9 +1021,12 @@ class InfiniteGridMenu {
       this.camera.fov,
       this.camera.aspect,
       this.camera.near,
-      this.camera.far
+      this.camera.far,
     );
-    mat4.invert(this.camera.matrices.inversProjection, this.camera.matrices.projection);
+    mat4.invert(
+      this.camera.matrices.inversProjection,
+      this.camera.matrices.projection,
+    );
   }
 
   #onControlUpdate(deltaTime) {
@@ -892,7 +1034,9 @@ class InfiniteGridMenu {
     let damping = 5 / timeScale;
     let cameraTargetZ = 3 * this.scaleFactor;
 
-    const isMoving = this.control.isPointerDown || Math.abs(this.smoothRotationVelocity) > 0.01;
+    const isMoving =
+      this.control.isPointerDown ||
+      Math.abs(this.smoothRotationVelocity) > 0.01;
 
     if (isMoving !== this.movementActive) {
       this.movementActive = isMoving;
@@ -903,20 +1047,27 @@ class InfiniteGridMenu {
       const nearestVertexIndex = this.#findNearestVertexIndex();
       const itemIndex = nearestVertexIndex % Math.max(1, this.items.length);
       this.onActiveItemChange(itemIndex);
-      const snapDirection = vec3.normalize(vec3.create(), this.#getVertexWorldPosition(nearestVertexIndex));
+      const snapDirection = vec3.normalize(
+        vec3.create(),
+        this.#getVertexWorldPosition(nearestVertexIndex),
+      );
       this.control.snapTargetDirection = snapDirection;
     } else {
       cameraTargetZ += this.control.rotationVelocity * 80 + 2.5;
       damping = 7 / timeScale;
     }
 
-    this.camera.position[2] += (cameraTargetZ - this.camera.position[2]) / damping;
+    this.camera.position[2] +=
+      (cameraTargetZ - this.camera.position[2]) / damping;
     this.#updateCameraMatrix();
   }
 
   #findNearestVertexIndex() {
     const n = this.control.snapDirection;
-    const inversOrientation = quat.conjugate(quat.create(), this.control.orientation);
+    const inversOrientation = quat.conjugate(
+      quat.create(),
+      this.control.orientation,
+    );
     const nt = vec3.transformQuat(vec3.create(), n, inversOrientation);
 
     let maxD = -1;
@@ -933,17 +1084,21 @@ class InfiniteGridMenu {
 
   #getVertexWorldPosition(index) {
     const nearestVertexPos = this.instancePositions[index];
-    return vec3.transformQuat(vec3.create(), nearestVertexPos, this.control.orientation);
+    return vec3.transformQuat(
+      vec3.create(),
+      nearestVertexPos,
+      this.control.orientation,
+    );
   }
 }
 
 const defaultItems = [
   {
-    image: 'https://picsum.photos/900/900?grayscale',
-    link: 'https://google.com/',
-    title: '',
-    description: ''
-  }
+    image: "https://picsum.photos/900/900?grayscale",
+    link: "https://google.com/",
+    title: "",
+    description: "",
+  },
 ];
 
 export default function InfiniteMenu({ items = [], scale = 1.0 }) {
@@ -955,7 +1110,7 @@ export default function InfiniteMenu({ items = [], scale = 1.0 }) {
     const canvas = canvasRef.current;
     let sketch;
 
-    const handleActiveItem = index => {
+    const handleActiveItem = (index) => {
       const itemIndex = index % items.length;
       setActiveItem(items[itemIndex]);
     };
@@ -966,8 +1121,8 @@ export default function InfiniteMenu({ items = [], scale = 1.0 }) {
         items.length ? items : defaultItems,
         handleActiveItem,
         setIsMoving,
-        sk => sk.run(),
-        scale
+        (sk) => sk.run(),
+        scale,
       );
     }
 
@@ -977,20 +1132,20 @@ export default function InfiniteMenu({ items = [], scale = 1.0 }) {
       }
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     handleResize();
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, [items, scale]);
 
   const handleButtonClick = () => {
     if (!activeItem?.link) return;
-    if (activeItem.link.startsWith('http')) {
-      window.open(activeItem.link, '_blank');
+    if (activeItem.link.startsWith("http")) {
+      window.open(activeItem.link, "_blank");
     } else {
-      console.log('Internal route:', activeItem.link);
+      console.log("Internal route:", activeItem.link);
     }
   };
 
@@ -999,74 +1154,149 @@ export default function InfiniteMenu({ items = [], scale = 1.0 }) {
       <canvas
         id="infinite-grid-menu-canvas"
         ref={canvasRef}
-        className="cursor-grab w-full h-full overflow-hidden relative outline-none active:cursor-grabbing" />
+        className="cursor-grab w-full h-full overflow-hidden relative outline-none active:cursor-grabbing"
+      />
+
+      <div
+        className={`
+    absolute inset-0 pointer-events-none transition-opacity duration-500
+    ${isMoving ? "opacity-0" : "opacity-100"}
+  `}
+        style={{
+          background: `
+      radial-gradient(circle at center,
+        rgba(0,0,0,0.0) 0%,
+        rgba(0,0,0,0.05) 25%,
+        rgba(0,0,0,0.6) 65%,
+        rgba(0,0,0,0.85) 100%
+      )
+    `,
+        }}
+      />
       {activeItem && (
         <>
           <h2
             className={`
-          select-none
-          absolute
-          font-black
-          [font-size:4rem]
-          left-[1.6em]
-          top-1/2
-          transform
-          translate-x-[20%]
-          -translate-y-1/2
-          transition-all
-          ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
-          ${
-            isMoving
-              ? 'opacity-0 pointer-events-none duration-[100ms]'
-              : 'opacity-100 pointer-events-auto duration-[500ms]'
-          }
-        `}>
+            select-none
+            absolute
+          
+            font-bold
+            font-['Sora']
+            text-[clamp(1.6rem,6vw,4rem)]
+          
+            /* MOBILE */
+            top-[12%]
+            left-1/2
+            -translate-x-1/2
+            text-center
+          
+            w-[80%]
+          
+            /* DESKTOP */
+            md:left-[5%]
+            md:top-1/2
+            md:-translate-x-0
+            md:-translate-y-1/2
+            md:text-left
+            md:w-[clamp(260px,22vw,420px)]
+            
+            wrap-break-words
+            whitespace-normal
+            leading-tight
+          
+            text-white
+            drop-shadow-[0_5px_20px_rgba(0,0,0,0.8)]
+          
+            transition-all
+            ${isMoving
+                ? "opacity-0 pointer-events-none duration-100"
+                : "opacity-100 pointer-events-auto duration-500"
+              }
+          `}
+          >
             {activeItem.title}
           </h2>
 
           <p
             className={`
-          select-none
-          absolute
-          max-w-[10ch]
-          text-[1.5rem]
-          top-1/2
-          right-[1%]
-          transition-all
-          ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
-          ${
-            isMoving
-              ? 'opacity-0 pointer-events-none duration-[100ms] translate-x-[-60%] -translate-y-1/2'
-              : 'opacity-100 pointer-events-auto duration-[500ms] translate-x-[-90%] -translate-y-1/2'
-          }
-        `}>
+              select-none
+              absolute
+          
+              font-['Sora']
+              text-[clamp(0.95rem,3.5vw,1.4rem)]
+          
+              /*  MOBILE */
+              bottom-[10%]
+              left-1/2
+              -translate-x-1/2
+              text-center
+          
+              w-[85%]
+          
+              /* DESKTOP */
+              md:right-[5%]
+              md:top-1/2
+              md:left-auto
+              md:-translate-x-0
+              md:-translate-y-1/2
+              md:text-right
+              md:w-[clamp(180px,22vw,320px)]
+          
+              break-words
+              whitespace-normal
+              leading-relaxed
+          
+              text-gray-300
+              drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)]
+              transition-all
+              ${isMoving
+                ? "opacity-0 pointer-events-none duration-100"
+                : "opacity-100 pointer-events-auto duration-500"
+              }
+            `}
+
+          >
             {activeItem.description}
           </p>
-
           <div
             onClick={handleButtonClick}
             className={`
-          absolute
-          left-1/2
-          z-10
-          w-[60px]
-          h-[60px]
-          grid
-          place-items-center
-          bg-[#00ffff]
-          border-[5px]
-          border-black
-          rounded-full
-          cursor-pointer
-          transition-all
-          ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
-          ${
-            isMoving
-              ? 'bottom-[-80px] opacity-0 pointer-events-none duration-[100ms] scale-0 -translate-x-1/2'
-              : 'bottom-[3.8em] opacity-100 pointer-events-auto duration-[500ms] scale-100 -translate-x-1/2'
-          }
-        `}>
-            <p className="select-none relative text-[#060010] top-[2px] text-[26px]">&#x2197;</p>
+              absolute
+              z-10
+          
+              w-[60px]
+              h-[60px]
+              grid
+              place-items-center
+          
+              bg-[#00ffff]
+              border-[5px]
+              border-black
+              rounded-full
+              cursor-pointer
+          
+              transition-all
+          
+              /* MOBILE */
+              left-1/2
+              bottom-[23%]
+              -translate-x-1/2
+              translate-y-0
+          
+              /* DESKTOP */
+              md:top-[81%]
+              md:left-1/2
+              md:bottom-auto
+              md:-translate-x-1/2
+              md:-translate-y-1/2
+              
+              ${isMoving
+                ? "opacity-0 scale-0 pointer-events-none duration-100"
+                : "opacity-100 scale-100 pointer-events-auto duration-500"
+              }
+            `}
+          >
+            <p className="text-[#060010] text-[26px]">&#x2197;</p>
           </div>
         </>
       )}

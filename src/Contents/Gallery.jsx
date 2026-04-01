@@ -21,13 +21,13 @@ const Gallery = () => {
     const myitems = [
         { image: img1, text: "Gojo Satoru" },
         { image: img2, text: "Roronoa Zoro" },
-        { image: img3, text: "Kid Buu" },
+        { image: img3, text: "Saitama" },
         { image: img4, text: "Naruto Uzumaki" },
         { image: img5, text: "Eren Yeager" },
         { image: img6, text: "Attack Titan" },
         { image: img7, text: "Light Yagami with Ryuk" },
         { image: img8, text: "Sung Jinwoo and his army" },
-        { image: img9, text: "Sōsuke Aizen" },
+        { image: img9, text: "Son Goku" },
         { image: img10, text: "Tanjirou Kamado" },
         { image: img11, text: "Ichigo kurosaki" },
         { image: img12, text: "Hollow Ichigo" },
@@ -62,7 +62,7 @@ const Gallery = () => {
                     </h1>
 
                     <h2 className="text-3xl md:text-4xl font-bold mt-2">
-                        Frames from Fiction
+                        Some Anime Heroes I Like
                     </h2>
                 </motion.div>
 
@@ -91,7 +91,7 @@ const Gallery = () => {
                 />
 
                 {/* Edge fade */}
-                <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-black via-transparent to-black" />
+                <div className="absolute inset-0 pointer-events-none bg-linear-to-r from-black via-transparent to-black" />
             </div>
 
         </section>

@@ -8,6 +8,7 @@ import About from './Contents/About.jsx';
 import Gallery from './Contents/Gallery.jsx';
 import Footer from './Contents/Footer.jsx';
 import LabNotice from './Contents/LabNotice.jsx';
+import InfinityGallery from './Contents/InfinityGallery.jsx';
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
       <Hero />
       <About />
       <Gallery />
+      <InfinityGallery />
       <Footer />
       <Analytics />
       <LabNotice />

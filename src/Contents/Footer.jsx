@@ -1,64 +1,34 @@
 import React from "react";
-import { motion } from "framer-motion"; //eslint-disable-line
-import { FaGithub, FaLinkedin } from "react-icons/fa";
-import CircularText from "@/components/mvpblocks/circular-text";
-
-
+import { FaGithub} from "react-icons/fa";
+import { ScrollVelocity } from "./../components/ScrollVelocity";
 
 const Footer = () => {
   return (
-    <footer className="relative w-full py-10 border-t border-white/10 bg-black text-white flex flex-col items-center justify-center gap-4">
+    <footer className="relative w-full bg-black text-white mt-32 pt-10">
+      {/* TOP FADE */}
+      <div className="absolute -top-10 left-0 w-full h-20 bg-linear-to-b from-transparent via-black/60 to-black pointer-events-none" />
 
-      {/* LEFT FLOATING CIRCLE */}
-      <div className="absolute left-4 top-1/2 -translate-y-1/2 scale-40 opacity-80">
-        <CircularText
-          text="*Under*Development"
-          spinDuration={20}
-          radius={25}
-          onHover="goBonkers"
-          className="text-[10px] text-white"
-        />
+      {/* DIVIDER */}
+      <div className="w-full h-px bg-linear-to-r from-transparent via-white/20 to-transparent mb-6" />
+
+      {/* Scroll Text */}
+      <ScrollVelocity
+        texts={["- Development in progress", "- Stay tuned for updates"]}
+        velocity={100}
+        className="text-gray-300 text-[clamp(1.2rem,2.5vw,2rem)] font-semibold tracking-wide"
+      />
+
+      <div className="flex flex-col items-center gap-4 py-10">
+        <div className="flex gap-6 text-xl">
+          <a href="https://github.com/Midhun-git-hub">
+            <FaGithub className="hover:text-cyan-400 transition" />
+          </a>
+        </div>
+
+        <p className="text-gray-600 text-xs">
+          © {new Date().getFullYear()} Midhun
+        </p>
       </div>
-
-      {/* Text */}
-      <motion.p
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        viewport={{ once: true }}
-        className="text-zinc-400 text-sm text-center"
-      >
-        Under Development.....
-      </motion.p>
-
-      {/* Sub text */}
-      <motion.p
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.2 }}
-        viewport={{ once: true }}
-        className="text-zinc-600 text-xs italic"
-      >
-        Built with curiosity and a bit of chaos.
-      </motion.p>
-
-      {/* Links */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-        viewport={{ once: true }}
-        className="flex gap-6 pt-2"
-      >
-        <a
-          href="https://github.com/Midhun-git-hub"
-          target="_blank"
-          className="text-zinc-400 hover:text-white transition"
-        >
-          <FaGithub size={18} />
-        </a>
-      </motion.div>
-
     </footer>
   );
 };

@@ -19,18 +19,18 @@ import img13 from '/images/image13.jpg';
 const Gallery = () => {
 
     const myitems = [
-        { image: img1, text: "Gojo Satoru" },
+        { image: img1, text: "Monkey D.Luffy" },
         { image: img2, text: "Roronoa Zoro" },
         { image: img3, text: "Saitama" },
         { image: img4, text: "Naruto Uzumaki" },
         { image: img5, text: "Eren Yeager" },
-        { image: img6, text: "Attack Titan" },
+        { image: img6, text: "Vinsmoke Sanji" },
         { image: img7, text: "Light Yagami with Ryuk" },
-        { image: img8, text: "Sung Jinwoo and his army" },
+        { image: img8, text: "Prince Vegeta" },
         { image: img9, text: "Son Goku" },
         { image: img10, text: "Tanjirou Kamado" },
         { image: img11, text: "Ichigo kurosaki" },
-        { image: img12, text: "Hollow Ichigo" },
+        { image: img12, text: "Kyojuro Rengoku" },
         { image: img13, text: "Edward Newgate" },
     ]
 

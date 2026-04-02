@@ -9,6 +9,8 @@ import Gallery from './Contents/Gallery.jsx';
 import Footer from './Contents/Footer.jsx';
 import LabNotice from './Contents/LabNotice.jsx';
 import InfinityGallery from './Contents/InfinityGallery.jsx';
+import GalleryInfo from './Contents/GalleryInfo.jsx';
+import Contact from './Contents/Contact.jsx';
 
 const App = () => {
   return (
@@ -27,8 +29,10 @@ const App = () => {
       </div>
       <Hero />
       <About />
+      <GalleryInfo />
       <Gallery />
       <InfinityGallery />
+      <Contact />
       <Footer />
       <Analytics />
       <LabNotice />

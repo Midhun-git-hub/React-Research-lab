@@ -1,5 +1,5 @@
 import React from "react";
-import { FaGithub} from "react-icons/fa";
+import { FaDiscord, FaGithub} from "react-icons/fa";
 import { ScrollVelocity } from "./../components/ScrollVelocity";
 
 const Footer = () => {
@@ -22,6 +22,9 @@ const Footer = () => {
         <div className="flex gap-6 text-xl">
           <a href="https://github.com/Midhun-git-hub">
             <FaGithub className="hover:text-cyan-400 transition" />
+          </a>
+          <a href="https://discord.com/users/770568742304219136">
+            <FaDiscord className="hover:text-cyan-400 transition" />
           </a>
         </div>
 

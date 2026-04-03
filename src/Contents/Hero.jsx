@@ -136,7 +136,7 @@ const Hero = () => {
   }, [isMobile]);
 
   return (
-    <section className="min-h-screen w-full bg-black text-white relative overflow-hidden">
+    <section id="home" className="min-h-screen w-full bg-black text-white relative overflow-hidden">
 
       {/* Background */}
       <div className="absolute inset-0 z-0">

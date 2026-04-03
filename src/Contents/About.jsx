@@ -20,7 +20,7 @@ const About = () => {
   };
 
   return (
-    <section className="w-full px-6 py-24 text-white flex items-center justify-center overflow-hidden">
+    <section id="about" className="w-full px-6 py-24 text-white flex items-center justify-center overflow-hidden">
       <div className="w-full max-w-3xl">
         <div className="text-center mb-12">
           <h1 className="text-sm tracking-[0.3em] text-zinc-500 uppercase">

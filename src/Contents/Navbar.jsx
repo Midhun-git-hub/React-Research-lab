@@ -4,12 +4,10 @@ import { Menu, X, ArrowRight, Search } from "lucide-react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 const navItems = [
-    { name: "Home", href: "#" },
-    { name: "Features", href: "#" },
-    { name: "Solutions", href: "#" },
-    { name: "Pricing", href: "#" },
-    { name: "Resources", href: "#" },
-    { name: "Contact", href: "#" },
+    { name: "Home", href: "#home" },
+    { name: "About", href: "#about" },
+    { name: "Collection", href: "#collection" },
+    { name: "Contact", href: "#contact" },
 ];
 
 const Navbar = () => {

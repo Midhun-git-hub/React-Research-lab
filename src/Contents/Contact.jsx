@@ -32,7 +32,7 @@ const Contact = () => {
     };
 
     return (
-        <section className="min-h-screen bg-black text-white flex items-center justify-center px-6">
+        <section id="contact" className="min-h-screen bg-black text-white flex items-center justify-center px-6">
             <div className="relative w-full max-w-xl">
                 {/* 💎 CARD */}
                 <div

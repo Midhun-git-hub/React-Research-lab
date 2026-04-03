@@ -6,7 +6,7 @@ import RotatingText from './../components/RotatingText';
 
 const GalleryInfo = () => {
     return (
-        <section className="relative w-full bg-black text-white py-20 px-6 flex justify-center">
+        <section id="collection" className="relative w-full bg-black text-white py-20 px-6 flex justify-center">
 
             <div className="max-w-3xl text-center">
 

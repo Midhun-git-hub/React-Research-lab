@@ -140,3 +140,7 @@
 .animate-chaos {
   animation: chaos 0.3s infinite;
 }
+
+html{
+  scroll-behavior: smooth;
+}

@@ -11,6 +11,7 @@ import LabNotice from './Contents/LabNotice.jsx';
 import InfinityGallery from './Contents/InfinityGallery.jsx';
 import GalleryInfo from './Contents/GalleryInfo.jsx';
 import Contact from './Contents/Contact.jsx';
+import InfinityInfo from './Contents/InfinityInfo.jsx';
 
 const App = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
       <About />
       <GalleryInfo />
       <Gallery />
+      <InfinityInfo />
       <InfinityGallery />
       <Contact />
       <Footer />

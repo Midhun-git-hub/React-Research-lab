@@ -113,7 +113,7 @@ const InfinityGallery = () => {
         top-0 left-0
         w-full h-[120px]
         z-10
-        bg-gradient-to-b from-black via-black/70 to-transparent"  
+        bg-gradient-to-b from-black via-black/70 to-transparent"
         />
 
         {/* BOTTOM GRADIENT */}
@@ -123,12 +123,14 @@ const InfinityGallery = () => {
         bottom-0 left-0
         w-full h-[140px]
         z-10
-        bg-gradient-to-t from-black via-black/70 to-transparent" 
+        bg-gradient-to-t from-black via-black/70 to-transparent"
         />
 
         <InfiniteMenu items={items} scale={1} />
+        <div className="absolute bottom-0 left-0 w-full flex justify-center">
+          <div className="w-[60%] h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent blur-[1px]" />
+        </div>
       </div>
-
     </div>
   )
 }

@@ -90,8 +90,9 @@ const Gallery = () => {
                     scrollSpeed={isMobile ? 3 : 1.5}
                 />
 
-                {/* Edge fade */}
-                <div className="absolute inset-0 pointer-events-none bg-linear-to-r from-black via-transparent to-black" />
+                <div className="absolute bottom-0 left-0 w-full flex justify-center">
+                    <div className="w-[60%] h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent blur-[1px]" />
+                </div>           
             </div>
 
         </section>

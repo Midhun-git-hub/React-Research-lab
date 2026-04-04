@@ -47,24 +47,37 @@ const Contact = () => {
                     "
                 >
                     {/* ⚡ LIGHTNING INSIDE CARD */}
-                    <div className="absolute inset-0 z-0 opacity-30 blur-md pointer-events-none">
-                        <Lightning hue={250} speed={0.3} intensity={0.7} size={2.5} />
+                    <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+
+                        {/* CENTER + SCALE FIX */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+
+                            {/* BIGGER CANVAS AREA */}
+                            <div className="w-[150%] h-[150%] md:w-[130%] md:h-[130%] opacity-40 blur-[45px] md:blur-[35px]">
+                                <Lightning
+                                    hue={250}
+                                    speed={0.25}
+                                    intensity={0.6}
+                                    size={2}
+                                />
+                            </div>
+
+                        </div>
                     </div>
 
-                    {/* 🔥 CONTENT */}
-                    {/* 🔥 CONTENT */}
+                    {/* CONTENT */}
                     <div className="relative z-10 text-center">
-                        {/* 🧠 LABEL */}
+                        {/* LABEL */}
                         <p className="text-xs tracking-[0.3em] text-zinc-500 uppercase mb-3">
                             Contact
                         </p>
 
-                        {/* 💎 MAIN HEADING */}
+                        {/* MAIN HEADING */}
                         <h2 className="text-3xl md:text-4xl font-bold mb-2">
                             Let’s build something cool
                         </h2>
 
-                        {/* 😎 SUBTEXT */}
+                        {/* SUBTEXT */}
                         <p className="text-zinc-400 mb-8 text-sm md:text-base">
                             not a formal thing — just drop ideas, feedback, or random thoughts
                             👀
@@ -120,7 +133,7 @@ const Contact = () => {
                                     focus:outline-none
                                     focus:border-purple-400
                                     focus:ring-2 focus:ring-purple-500/30
-                                    " 
+                                    "
                                 />
                             </div>
 
@@ -138,7 +151,7 @@ const Contact = () => {
                                 tracking-wide
                                 hover:shadow-lg hover:shadow-purple-500/30
                                 transition
-                              "
+                                "
                             >
                                 send it 🚀
                             </motion.button>

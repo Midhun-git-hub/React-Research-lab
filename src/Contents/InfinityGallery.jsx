@@ -1,17 +1,17 @@
 import React from 'react'
 import InfiniteMenu from './../components/InfiniteMenu';
-import villain1 from '/images/villain1.png';
-import villain2 from '/images/villain2.png';
-import villain3 from '/images/villain3.png';
-import villain4 from '/images/villain4.png';
-import villain5 from '/images/villain5.png';
-import villain6 from '/images/villain6.png';
-import villain7 from '/images/villain7.png';
-import villain8 from '/images/villain8.png';
-import villain9 from '/images/villain9.png';
-import villain10 from '/images/villain10.png';
-import villain11 from '/images/villain11.png';
-import villain12 from '/images/villain12.png';
+import villain1 from '/images/villain1.webp';
+import villain2 from '/images/villain2.webp';
+import villain3 from '/images/villain3.webp';
+import villain4 from '/images/villain4.webp';
+import villain5 from '/images/villain5.webp';
+import villain6 from '/images/villain6.webp';
+import villain7 from '/images/villain7.webp';
+import villain8 from '/images/villain8.webp';
+import villain9 from '/images/villain9.webp';
+import villain10 from '/images/villain10.webp';
+import villain11 from '/images/villain11.webp';
+import villain12 from '/images/villain12.webp';
 
 
 const InfinityGallery = () => {

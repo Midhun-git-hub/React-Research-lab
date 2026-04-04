@@ -1,8 +1,5 @@
-import React, { useEffect, useState, memo, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import FuzzyText from "@/components/FuzzyText";
-import Threads from "./../components/Threads";
-
-const MemoThreads = memo(Threads);
 
 const texts = [
   "Welcome to React Lab...",
@@ -15,89 +12,52 @@ const texts = [
 const Hero = () => {
   const [index, setIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
 
+  /* =========================
+     ✨ Smooth Typewriter (No Lag)
+  ========================= */
   useEffect(() => {
     let timeout;
 
-    const handleResize = () => {
-      clearTimeout(timeout);
+    if (charIndex < texts[index].length) {
       timeout = setTimeout(() => {
-        setIsMobile(window.innerWidth < 768);
-      }, 150);
-    };
+        setCharIndex((prev) => prev + 1);
+      }, 40);
+    } else {
+      timeout = setTimeout(() => {
+        setCharIndex(0);
+        setIndex((prev) => (prev + 1) % texts.length);
+      }, 1200);
+    }
 
-    handleResize();
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  useEffect(() => {
-    const speed = isMobile ? 55 : 35;
-
-    let typingInterval;
-    let pauseTimeout;
-
-    typingInterval = setInterval(() => {
-      setCharIndex((prev) => {
-        if (prev < texts[index].length) {
-          return prev + 1;
-        } else {
-          clearInterval(typingInterval);
-
-          pauseTimeout = setTimeout(() => {
-            setCharIndex(0);
-            setIndex((i) => (i + 1) % texts.length);
-          }, 1200);
-
-          return prev;
-        }
-      });
-    }, speed);
-
-    return () => {
-      clearInterval(typingInterval);
-      clearTimeout(pauseTimeout);
-    };
-  }, [index, isMobile]);
+    return () => clearTimeout(timeout);
+  }, [charIndex, index]);
 
   const displayText = texts[index].slice(0, charIndex);
 
-  const background = useMemo(() => {
-    return (
-      <MemoThreads
-        amplitude={isMobile ? 0.25 : 0.9}
-        distance={isMobile ? 0.2 : 0}
-        enableMouseInteraction={true}
-      />
-    );
-  }, [isMobile]);
-
   return (
-    <section
-      id="home"
-      className="min-h-screen w-full bg-black text-white relative overflow-hidden"
-    >
+    <section id="home" className="min-h-screen w-full bg-black text-white relative overflow-hidden">
+
       {/* Background */}
-      <div className="absolute inset-0 z-0">{background}</div>
+      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,rgba(0,255,255,0.08),transparent_70%)]" />
 
       {/* Overlay */}
-      <div className="absolute inset-0 z-10 bg-black/60 pointer-events-none" />
+      <div className="absolute inset-0 z-10 bg-black/70" />
 
       {/* Content */}
       <div className="relative z-20 flex flex-col items-center justify-center text-center px-6 min-h-screen">
+
         {/* Title */}
         <div className="text-[clamp(1.8rem,3vw,2.4rem)] text-zinc-300">
-          <FuzzyText baseIntensity={0.08} hoverIntensity={0.4} enableHover>
+          <FuzzyText baseIntensity={0.06} hoverIntensity={0.3} enableHover>
             404
           </FuzzyText>
         </div>
 
         {/* Subtitle */}
         <div className="text-sm mt-2 text-zinc-400">
-          <FuzzyText baseIntensity={0.08} hoverIntensity={0.25} enableHover>
-            React 
+          <FuzzyText baseIntensity={0.06} hoverIntensity={0.2} enableHover>
+            React
           </FuzzyText>
         </div>
 
@@ -106,6 +66,7 @@ const Hero = () => {
           {displayText}
           <span className="animate-pulse ml-1">|</span>
         </p>
+
       </div>
     </section>
   );

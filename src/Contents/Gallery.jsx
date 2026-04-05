@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import { motion } from 'framer-motion';  //eslint-disable-line
-import CircularGallery from './../components/CircularGallery';
-import img1 from '/images/image1.jpg';
-import img2 from '/images/image2.jpg';
-import img3 from '/images/image3.jpg';
-import img4 from '/images/image4.jpg';
-import img5 from '/images/image5.jpg';
-import img6 from '/images/image6.jpg';
-import img7 from '/images/image7.jpg';
-import img8 from '/images/image8.jpg';
-import img9 from '/images/image9.jpg';
-import img10 from '/images/image10.jpg';
-import img11 from '/images/image11.jpg';
-import img12 from '/images/image12.jpg';
-import img13 from '/images/image13.jpg';
+import { motion } from 'framer-motion'
+import CircularGallery from './../components/CircularGallery'
 
+import img1 from '/images/image1.jpg'
+import img2 from '/images/image2.jpg'
+import img3 from '/images/image3.jpg'
+import img4 from '/images/image4.jpg'
+import img5 from '/images/image5.jpg'
+import img6 from '/images/image6.jpg'
+import img7 from '/images/image7.jpg'
+import img8 from '/images/image8.jpg'
+import img9 from '/images/image9.jpg'
+import img10 from '/images/image10.jpg'
+import img11 from '/images/image11.jpg'
+import img12 from '/images/image12.jpg'
+import img13 from '/images/image13.jpg'
 
 const Gallery = () => {
 
@@ -34,14 +34,14 @@ const Gallery = () => {
         { image: img13, text: "Edward Newgate" },
     ]
 
-    const [isMobile, setIsMobile] = useState(false);
+    const [isMobile, setIsMobile] = useState(false)
 
     useEffect(() => {
-        const check = () => setIsMobile(window.innerWidth < 768);
-        check();
-        window.addEventListener("resize", check);
-        return () => window.removeEventListener("resize", check);
-    }, []);
+        const check = () => setIsMobile(window.innerWidth < 768)
+        check()
+        window.addEventListener("resize", check)
+        return () => window.removeEventListener("resize", check)
+    }, [])
 
     return (
         <section className="w-full min-h-screen flex flex-col items-center justify-center bg-black text-white overflow-hidden">
@@ -49,7 +49,6 @@ const Gallery = () => {
             {/* Heading */}
             <div className="flex flex-col items-center gap-3 mb-10 mt-20">
 
-                {/* Heading */}
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -66,7 +65,6 @@ const Gallery = () => {
                     </h2>
                 </motion.div>
 
-                {/* Copyright Chip */}
                 <motion.span
                     initial={{ opacity: 0, y: 10, scale: 0.95 }}
                     whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -79,8 +77,10 @@ const Gallery = () => {
 
             </div>
 
-            {/* Gallery */}
+            {/* Gallery Container */}
             <div className="w-full max-w-5xl h-[350px] md:h-[600px] relative">
+
+                {/* MAIN GALLERY */}
                 <CircularGallery
                     items={myitems}
                     bend={isMobile ? 0.8 : 2}
@@ -90,9 +90,29 @@ const Gallery = () => {
                     scrollSpeed={isMobile ? 3 : 1.5}
                 />
 
-                <div className="absolute bottom-0 left-0 w-full flex justify-center">
+                {/* GLOBAL SHADE (dims everything slightly) */}
+                <div className="pointer-events-none absolute inset-0 z-[5] bg-black/40" />
+
+                {/* CENTER FOCUS LIGHT */}
+                <div className="pointer-events-none absolute inset-0 z-[6] flex items-center justify-center">
+                    <div className="w-[40%] h-[60%] 
+                        bg-[radial-gradient(circle,rgba(255,255,255,0.12),transparent_70%)] 
+                        blur-2xl" />
+                </div>
+
+                {/* LEFT SIDE FADE */}
+                <div className="pointer-events-none absolute top-0 left-0 h-full w-[25%] z-[6]
+                    bg-gradient-to-r from-black via-black/70 to-transparent" />
+
+                {/* RIGHT SIDE FADE */}
+                <div className="pointer-events-none absolute top-0 right-0 h-full w-[25%] z-[6]
+                    bg-gradient-to-l from-black via-black/70 to-transparent" />
+
+                {/* BOTTOM LINE */}
+                <div className="absolute bottom-0 left-0 w-full flex justify-center z-[7]">
                     <div className="w-[60%] h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent blur-[1px]" />
-                </div>           
+                </div>
+
             </div>
 
         </section>

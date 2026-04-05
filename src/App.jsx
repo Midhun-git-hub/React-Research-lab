@@ -12,6 +12,7 @@ import InfinityGallery from './Contents/InfinityGallery.jsx';
 import GalleryInfo from './Contents/GalleryInfo.jsx';
 import Contact from './Contents/Contact.jsx';
 import InfinityInfo from './Contents/InfinityInfo.jsx';
+import OrbitImage from './Contents/OrbitImage.jsx';
 
 const App = () => {
   return (
@@ -34,6 +35,7 @@ const App = () => {
       <Gallery />
       <InfinityInfo />
       <InfinityGallery />
+      <OrbitImage />
       <Contact />
       <Footer />
       <Analytics />

@@ -182,13 +182,16 @@ export default function OrbitImages({
   const containerWidth = responsive ? '100%' : (typeof width === 'number' ? width : '100%');
   const containerHeight = responsive ? 'auto' : (typeof height === 'number' ? height : (typeof width === 'number' ? width : 'auto'));
 
-  const items = images.map((src, index) => (
+  const items = images.map((item, index) => (
+    <div className='group cursor-pointer flex flex-col items-center justify-center'>
     <img
-      key={src}
-      src={src}
+      key={index}
+      src={item.src}
       alt={`${altPrefix} ${index + 1}`}
       draggable={false}
-      className="w-full h-full object-contain" />
+      className="w-full h-20 object-contain transition-all duration-300 group-hover:scale-300 shadow-xl" />
+      <p className="text-center mt-2">{item.name}</p>
+      </div>
   ));
 
   return (

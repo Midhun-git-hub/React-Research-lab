@@ -6,7 +6,8 @@ const TargetCursor = ({
   spinDuration = 2,
   hideDefaultCursor = true,
   hoverDuration = 0.2,
-  parallaxOn = true
+  parallaxOn = true,
+  containerRef, ...props
 }) => {
   const cursorRef = useRef(null);
   const cornersRef = useRef(null);
@@ -45,11 +46,6 @@ const TargetCursor = ({
 
   useEffect(() => {
     if (isMobile || !cursorRef.current) return;
-
-    const originalCursor = document.body.style.cursor;
-    if (hideDefaultCursor) {
-      document.body.style.cursor = 'none';
-    }
 
     const cursor = cursorRef.current;
     cornersRef.current = cursor.querySelectorAll('.target-cursor-corner');
@@ -112,7 +108,24 @@ const TargetCursor = ({
 
     tickerFnRef.current = tickerFn;
 
-    const moveHandler = e => moveCursor(e.clientX, e.clientY);
+    const moveHandler = (e) => {
+  if (!containerRef?.current) return;
+
+  const rect = containerRef.current.getBoundingClientRect();
+
+  const isInside =
+    e.clientX >= rect.left &&
+    e.clientX <= rect.right &&
+    e.clientY >= rect.top &&
+    e.clientY <= rect.bottom;
+
+  if (isInside) {
+    moveCursor(e.clientX, e.clientY);
+    gsap.set(cursorRef.current, { opacity: 1 }); // show
+  } else {
+    gsap.set(cursorRef.current, { opacity: 0 }); // hide
+  }
+};
     window.addEventListener('mousemove', moveHandler);
 
     const scrollHandler = () => {
@@ -271,7 +284,6 @@ const TargetCursor = ({
         cleanupTarget(activeTarget);
       }
       spinTl.current?.kill();
-      document.body.style.cursor = originalCursor;
       isActiveRef.current = false;
       targetCornerPositionsRef.current = null;
       activeStrengthRef.current = 0;

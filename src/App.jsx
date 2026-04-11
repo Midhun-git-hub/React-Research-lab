@@ -37,7 +37,7 @@ const App = () => {
       <InfinityInfo />
       <InfinityGallery />
       <OrbitImage />
-      <Target />
+      {/* <Target /> */}
       <Contact />
       <Footer />
       <Analytics />

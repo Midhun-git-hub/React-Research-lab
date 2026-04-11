@@ -23,7 +23,8 @@ const OrbitImage = () => {
   ];
 
   return (
-    <section className='min-h-screen w-full flex flex-col items-center justify-center space-y-8'>
+    <section className="min-h-screen w-full flex flex-col items-center justify-center space-y-8 overflow-hidden">
+
       <motion.div
         transition={{ duration: 0.8 }}
         className='space-y-8'
@@ -32,7 +33,8 @@ const OrbitImage = () => {
         <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration:0.8, delay:0.2 }} className='text-center text-gray-500 max-w-md'>Not all scars are visible — some become silence, some chaos, some laughter.</motion.p>
         <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration:0.8, delay:0.3 }} className='text-center text-gray-500 max-w-md'>A personal take on what it means to be broken — open to interpretation.</motion.p>
       </motion.div>
-        <div className='w-[800px] h-[400px] relative flex items-center justify-center'>
+        <div className="w-full max-w-[800px] h-[250px] sm:h-[300px] md:h-[400px] relative flex items-center justify-center">
+
           <OrbitImages
             images={images}
           shape="ellipse"

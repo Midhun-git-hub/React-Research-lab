@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import TargetCursor from './../components/TargetCursor';
-import hitman1 from '/images/hitman1.jpg';  
+import hitman1 from '/images/hitman1.jpg';
 import hitman2 from '/images/hitman2.jpg';
 import hitman3 from '/images/hitman3.jpg';
 import hitman4 from '/images/hitman4.jpg';
@@ -31,11 +31,16 @@ const Target = () => {
                     hoverDuration={0.2}
                 />
 
-                <h1 className="text-2xl font-semibold">
-                    Hover over the elements below
+                <h1 className="text-2xl font-semibold text-center">
+                    Some random targets to practice your aim on
                 </h1>
 
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mt-10 auto-rows-[200px]">
+                <div className="mt-3 text-center text-zinc-400 text-sm max-w-xl mx-auto">
+                    This is still a work in progress, so it might behave weirdly sometimes. But the cursor is fully functional, so feel free to test your aim on these targets!. <br />
+                    (P.S: The cursor works best on PC rather than mobile, so if you're on mobile, try to hover over the targets slowly for a better experience.)
+                </div>
+
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mt-10 auto-rows-[180px]">
 
                     {items.map((item) => (
                         <div
@@ -43,6 +48,7 @@ const Target = () => {
                             className={`
                                 cursor-target
                                 relative
+                                h-full
                                 overflow-hidden
                                 rounded-2xl
                                 group

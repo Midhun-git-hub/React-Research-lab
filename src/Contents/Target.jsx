@@ -1,10 +1,27 @@
 import React, { useRef } from 'react'
 import TargetCursor from './../components/TargetCursor';
+import hitman1 from '/images/hitman1.jpg';  
+import hitman2 from '/images/hitman2.jpg';
+import hitman3 from '/images/hitman3.jpg';
+import hitman4 from '/images/hitman4.jpg';
+import hitman5 from '/images/hitman5.jpg';
+import hitman6 from '/images/hitman6.jpg';
 
 const Target = () => {
     const containerRef = useRef(null);
+
+    // 🔥 layout variations
+    const items = [
+        { id: "Agent 47", img: hitman1, type: "square" },
+        { id: "Sakamoto", img: hitman2, type: "portrait" },
+        { id: "Deadshot", img: hitman3, type: "portrait" },
+        { id: "God Ussop", img: hitman4, type: "portrait" },
+        { id: "Soge King", img: hitman5, type: "portrait" },
+        { id: "Hawk Eye", img: hitman6, type: "square" },
+    ];
+
     return (
-        <section ref={containerRef}>
+        <section ref={containerRef} className="px-6 py-10">
             <div>
                 <TargetCursor
                     containerRef={containerRef}
@@ -14,32 +31,45 @@ const Target = () => {
                     hoverDuration={0.2}
                 />
 
-                <h1>Hover over the elements below</h1>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mt-10">
+                <h1 className="text-2xl font-semibold">
+                    Hover over the elements below
+                </h1>
 
-                    <div className="cursor-target bg-zinc-900 rounded-xl h-48 flex items-center justify-center border border-white/10 hover:border-white/30 transition-all">
-                        <p className="text-gray-500 text-sm">Image 1</p>
-                    </div>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mt-10 auto-rows-[200px]">
 
-                    <div className="cursor-target bg-zinc-900 rounded-xl h-48 flex items-center justify-center border border-white/10 hover:border-white/30 transition-all">
-                        <p className="text-gray-500 text-sm">Image 2</p>
-                    </div>
+                    {items.map((item) => (
+                        <div
+                            key={item.id}
+                            className={`
+                                cursor-target
+                                relative
+                                overflow-hidden
+                                rounded-2xl
+                                group
+                                border border-white/10
+                                hover:border-white/30
+                                transition-all duration-300
+                                ${item.type === "portrait" ? "row-span-2" : ""}
+                            `}
+                        >
+                            {/* IMAGE */}
+                            <img
+                                src={item.img}
+                                alt={`Hitman ${item.id}`}
+                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            />
 
-                    <div className="cursor-target bg-zinc-900 rounded-xl h-48 flex items-center justify-center border border-white/10 hover:border-white/30 transition-all">
-                        <p className="text-gray-500 text-sm">Image 3</p>
-                    </div>
+                            {/* DARK OVERLAY */}
+                            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-300" />
 
-                    <div className="cursor-target bg-zinc-900 rounded-xl h-48 flex items-center justify-center border border-white/10 hover:border-white/30 transition-all">
-                        <p className="text-gray-500 text-sm">Image 4</p>
-                    </div>
-
-                    <div className="cursor-target bg-zinc-900 rounded-xl h-48 flex items-center justify-center border border-white/10 hover:border-white/30 transition-all">
-                        <p className="text-gray-500 text-sm">Image 5</p>
-                    </div>
-
-                    <div className="cursor-target bg-zinc-900 rounded-xl h-48 flex items-center justify-center border border-white/10 hover:border-white/30 transition-all">
-                        <p className="text-gray-500 text-sm">Image 6</p>
-                    </div>
+                            {/* TEXT REVEAL */}
+                            <div className="absolute bottom-4 left-4 translate-y-6 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+                                <p className="text-white text-sm tracking-wide">
+                                    {item.id}
+                                </p>
+                            </div>
+                        </div>
+                    ))}
 
                 </div>
             </div>
@@ -47,4 +77,4 @@ const Target = () => {
     )
 }
 
-export default Target
+export default Target;

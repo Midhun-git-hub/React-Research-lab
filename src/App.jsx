@@ -14,6 +14,7 @@ import Contact from "./Contents/Contact.jsx";
 import InfinityInfo from "./Contents/InfinityInfo.jsx";
 import OrbitImage from "./Contents/OrbitImage.jsx";
 import Target from "./Contents/Target.jsx";
+import Bounce from "./Contents/Bounce.jsx";
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
       <InfinityGallery />
       <OrbitImage />
       <Target />
+      <Bounce />
       <Contact />
       <Footer />
       <Analytics />

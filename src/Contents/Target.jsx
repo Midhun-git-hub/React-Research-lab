@@ -10,7 +10,6 @@ import hitman6 from '/images/hitman6.jpg';
 const Target = () => {
     const containerRef = useRef(null);
 
-    // 🔥 layout variations
     const items = [
         { id: "Agent 47", img: hitman1, type: "square" },
         { id: "Sakamoto", img: hitman2, type: "portrait" },
